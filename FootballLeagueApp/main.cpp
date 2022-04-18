@@ -146,8 +146,23 @@ void assistantMenu(){
 }
 
 void DoInitialize (void){
-    cout << "DoInitialize should initialise a league table." << endl;
-
+    string name, kNum;
+    bool foundInList; //  Boolean to check if leage found in list
+    cout << "Please enter the following information and to initalise the program." << endl;
+    for(int i = 0; i < LEAGUE_SIZE; i++){
+        do{ //  Do While loop to check if name league already exists
+            cout << "Team " << (i+1) << endl << "\tName: ";
+            foundInList = false;
+            cin >> name;
+            for(int i = 0; i < LEAGUE_SIZE; i++)
+                if(league[i].HasName(name))
+                    foundInList = true;
+            if(foundInList) //  Output to user if student already exists.
+                cout << "A team with that name already exists in the league! Try again!" << endl;
+        } while(foundInList);
+        league[i] = CFootballTeam(name); //  Add Team to list once we are sure they don't already exist
+        cout << endl;
+    }
 }
 
 void DoDisplayLeague (void){
