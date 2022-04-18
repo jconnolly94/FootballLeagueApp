@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B9AA8D0B280DD8C4002519B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9AA8D0A280DD8C4002519B4 /* main.cpp */; };
+		B9AA8D13280DD8F3002519B4 /* CFootballTeam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9AA8D11280DD8F3002519B4 /* CFootballTeam.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		B9AA8D07280DD8C4002519B4 /* FootballLeagueApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FootballLeagueApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9AA8D0A280DD8C4002519B4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B9AA8D11280DD8F3002519B4 /* CFootballTeam.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CFootballTeam.cpp; sourceTree = "<group>"; };
+		B9AA8D12280DD8F3002519B4 /* CFootballTeam.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CFootballTeam.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				B9AA8D0A280DD8C4002519B4 /* main.cpp */,
+				B9AA8D11280DD8F3002519B4 /* CFootballTeam.cpp */,
+				B9AA8D12280DD8F3002519B4 /* CFootballTeam.hpp */,
 			);
 			path = FootballLeagueApp;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9AA8D0B280DD8C4002519B4 /* main.cpp in Sources */,
+				B9AA8D13280DD8F3002519B4 /* CFootballTeam.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
