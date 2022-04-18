@@ -40,6 +40,27 @@ CFootballTeam::CFootballTeam(string name, int gamesPlayed, int goalsFor, int goa
     m_Points = points;
 }
 
+string CFootballTeam::GetName(){
+    return m_Name;
+}
+
+int CFootballTeam::GetGamesPlayed(){
+    return m_GamesPlayed;
+}
+
+int CFootballTeam::GetGoalsFor(){
+    return m_GoalsFor;
+}
+
+int CFootballTeam::GetGoalsAgainst(){
+    return m_GoalsAgainst;
+}
+
+int CFootballTeam::GetPoints(){
+    return m_Points;
+}
+
+
 //  Checks if object has given string as name
 bool CFootballTeam::HasName(string searchName){
     if(m_Name == searchName)

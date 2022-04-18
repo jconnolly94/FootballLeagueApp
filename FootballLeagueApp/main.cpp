@@ -13,6 +13,7 @@ void mainMenu(void);
 void assistantMenu(void);
 void managerMenu(void);
 
+// Main Function Prototypes
 void DoInitialize (void);
 void DoDisplayLeague (void);
 void DoEnterMatchResult (void);
@@ -20,6 +21,10 @@ void DoDeductPoints (void);
 void DoBestDefence (void);
 void DoRelegationZone (void);
 void DoRemoveTeamFromList(void);
+
+// Support Function Prototpes
+bool teamExistsInLeague(string);
+
 
 //global variable to track league size
 const int LEAGUE_SIZE = 5;
@@ -49,7 +54,7 @@ void mainMenu(){
                 assistantMenu();
                 break;
             case 3:
-                cout << "Terminating application!" << endl;
+                cout << "Terminating application." << endl;
                 selection = -1;
                 break;
             default:
@@ -102,7 +107,7 @@ void managerMenu(){
                 cout << "Functionality not yet implemented" << endl;
                 break;
             case 0:
-                cout << "Returning to main menu!" << endl;
+                cout << "Returning to main menu." << endl;
                 selection = -1;
                 break;
             default:
@@ -135,7 +140,7 @@ void assistantMenu(){
                 DoRelegationZone();
                 break;
             case 0:
-                cout << "Returning to main menu!" << endl;
+                cout << "Returning to main menu." << endl;
                 selection = -1;
                 break;
             default:
@@ -154,11 +159,9 @@ void DoInitialize (void){
             cout << "Team " << (i+1) << endl << "\tName: ";
             foundInList = false;
             cin >> name;
-            for(int i = 0; i < LEAGUE_SIZE; i++)
-                if(league[i].HasName(name))
-                    foundInList = true;
+            foundInList = teamExistsInLeague(name);
             if(foundInList) //  Output to user if student already exists.
-                cout << "A team with that name already exists in the league! Try again!" << endl;
+                cout << "A team with that name already exists in the league! Try again." << endl;
         } while(foundInList);
         league[i] = CFootballTeam(name); //  Add Team to list once we are sure they don't already exist
         cout << endl;
@@ -176,8 +179,27 @@ void DoEnterMatchResult (void){
 }
 
 void DoDeductPoints (void){
+    bool found;
+    string name;
+    int points;
     cout << "DoDeductPoints should get number of points and team name from user and make relevant change" << endl;
-    
+    cout << "Please enter a Team name:";
+    cin >> name;
+    do{
+        found = teamExistsInLeague(name);
+        if(!found)
+            cout << "Team does not exist in the league, please try again." << endl;
+    } while(!found);
+    cout << "How many points would you like to deduct? ";
+    cin >> points;
+    for(int i = 0; i < LEAGUE_SIZE; i++)
+        if(league[i].HasName(name)){
+            if(league[i].GetPoints() >= points)
+                league[i].DeductPoints(points);
+            else
+                cout << "Error: Leagues total points exceeded, no change made.";
+        }
+            
 }
 
 void DoBestDefence (void){
@@ -194,3 +216,11 @@ void DoRemoveTeamFromList(void){
     cout << "Allows the user to remove a team from the existing list of teams." << endl;
     
 }
+
+bool teamExistsInLeague(string name){
+    for(int i = 0; i < LEAGUE_SIZE; i++)
+        if(league[i].HasName(name))
+            return true;
+    return false;
+}
+
