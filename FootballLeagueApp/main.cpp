@@ -21,8 +21,10 @@ void DoBestDefence (void);
 void DoRelegationZone (void);
 void DoRemoveTeamFromList(void);
 
-//global variable to track league size, not a const as this will later be variable
-int LEAGUE_SIZE = 5;
+//global variable to track league size
+const int LEAGUE_SIZE = 5;
+
+CFootballTeam league[LEAGUE_SIZE];
 
 int main() {
     cout << "Welcome to the Football Leage Applicaiton" << endl;
