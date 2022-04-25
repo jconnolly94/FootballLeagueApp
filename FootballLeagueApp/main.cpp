@@ -27,13 +27,14 @@ bool teamExistsInLeague(string);
 
 
 //global variable to track league size
-const int LEAGUE_SIZE = 5;
+int LEAGUE_SIZE = 5;
 
-CFootballTeam league[LEAGUE_SIZE];
+CFootballTeam* league = new CFootballTeam[LEAGUE_SIZE];
 
 int main() {
     cout << "Welcome to the Football Leage Applicaiton" << endl;
     mainMenu();
+    delete[] league;
 }
 
 
@@ -171,9 +172,15 @@ void DoInitialize (void){
 void DoDisplayLeague(void) {
    
     cout << "DoDisplayLeague should display the league table" << endl;
+    // Added table headers as requested in project spec
     cout << "|\tName\t\tGames Played\tGoals For\tGoals Against\tPoints\t|" << endl;
     for (int i = 0; i < LEAGUE_SIZE; i++) {
-       
+//        Formatting output as table
+//        cout << "Name: " << league[i].GetName() << endl;
+//        cout << "games Played: " << league[i].GetGamesPlayed() << endl;
+//        cout << "goals for: " << league[i].GetGoalsFor() << endl;
+//        cout << "goals Against: " << league[i].GetGoalsAgainst() << endl;
+//        cout << "points: " << league[i].GetPoints() << endl;
         cout << "|\t" << league[i].GetName() << "\t|\t";
         cout << league[i].GetGamesPlayed() << "\t|\t";
         cout << league[i].GetGoalsFor() << "\t|\t";
@@ -195,8 +202,9 @@ void DoDeductPoints (void){
     int points;
     cout << "DoDeductPoints should get number of points and team name from user and make relevant change" << endl;
     cout << "Please enter a Team name:";
-    cin >> name;
+    // check if team exists and propt user again if not found
     do{
+        cin >> name;
         found = teamExistsInLeague(name);
         if(!found)
             cout << "Team does not exist in the league, please try again." << endl;
