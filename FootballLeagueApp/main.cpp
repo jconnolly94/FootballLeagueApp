@@ -256,7 +256,30 @@ void DoRelegationZone (void){
 
 void DoRemoveTeamFromList(void){
     cout << "Allows the user to remove a team from the existing list of teams." << endl;
-    
+        string name, kNum;
+        bool foundInList;
+        int found = 0;
+        cout << "Please enter the team name you wish to delete." << endl;
+        cin >> name;
+        for (int i = 0; i < LEAGUE_SIZE; i++)
+        {
+            foundInList = teamExistsInLeague(name);
+            if (foundInList)
+            {
+            //delete team
+           
+                for (int j = i; j < (LEAGUE_SIZE - 1); j++)
+                {
+                    LEAGUE_SIZE.erase(LEAGUE_SIZE.begin() + j);
+                    found++;
+                }
+            }
+        }
+        if (found == 0)
+            cout << "\team wasnt't found in the Array!";
+        else
+            cout << "\team Deleted Successfully!";
+        cout << endl;
 }
 
 bool teamExistsInLeague(string name){
