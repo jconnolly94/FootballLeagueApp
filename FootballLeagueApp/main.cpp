@@ -171,16 +171,17 @@ void DoInitialize (void){
 void DoDisplayLeague(void) {
    
     cout << "DoDisplayLeague should display the league table" << endl;
+    cout << "|\tName\t\tGames Played\tGoals For\tGoals Against\tPoints\t|" << endl;
     for (int i = 0; i < LEAGUE_SIZE; i++) {
        
-        cout << "Name:\t" << league[i].GetName() << endl;
-        cout << "Games Played:\t" << league[i].GetGamesPlayed() << endl;
-        cout << "Goals for:\t" << league[i].GetGoalsFor() << endl;
-        cout << "Goals Against:\t" << league[i].GetGoalsAgainst() << endl;
-        cout << "Points:\t" << league[i].GetPoints() << endl;
-       
+        cout << "|\t" << league[i].GetName() << "\t|\t";
+        cout << league[i].GetGamesPlayed() << "\t|\t";
+        cout << league[i].GetGoalsFor() << "\t|\t";
+        cout << league[i].GetGoalsAgainst() << "\t|\t";
+        cout << league[i].GetPoints() << "\t|" << endl;
        
     }
+    
 }
 
 void DoEnterMatchResult (void){
