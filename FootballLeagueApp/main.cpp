@@ -215,7 +215,22 @@ void DoDeductPoints (void){
 
 void DoBestDefence (void){
     cout << "DoBestDefence (callback for option 5) should firstly search the collection league to ascertain the lowest number of goals against. The collection should then be re-searched and the name(s) of the team(s) with the lowest goals against should be displayed." << endl;
-    
+    double BestDef, Def;
+    BestDef = league[0].GetGoalsAgainst();
+    for (int i = 0; i < LEAGUE_SIZE; i++)
+    {
+        Def = league[i].GetGoalsAgainst();
+        if (BestDef > Def)
+        {
+            BestDef = Def;
+        }
+    }
+    for (int i = 0; i < LEAGUE_SIZE; i++)
+        if (BestDef == league[i].GetGoalsAgainst())
+        {
+            cout << "Name: "<< league[i].GetName() <<" Games Played: " << league[i].GetGamesPlayed() << " Goals for: "<< league[i].GetGoalsFor()
+                << " Goals Against: " << league[i].GetGoalsAgainst() << " Points: " << league[i].GetPoints() << endl;
+        }
 }
 
 void DoRelegationZone (void){
