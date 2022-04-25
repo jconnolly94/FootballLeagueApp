@@ -168,9 +168,19 @@ void DoInitialize (void){
     }
 }
 
-void DoDisplayLeague (void){
+void DoDisplayLeague(void) {
+   
     cout << "DoDisplayLeague should display the league table" << endl;
-
+    for (int i = 0; i < LEAGUE_SIZE; i++) {
+       
+        cout << "Name:\t" << league[i].GetName() << endl;
+        cout << "Games Played:\t" << league[i].GetGamesPlayed() << endl;
+        cout << "Goals for:\t" << league[i].GetGoalsFor() << endl;
+        cout << "Goals Against:\t" << league[i].GetGoalsAgainst() << endl;
+        cout << "Points:\t" << league[i].GetPoints() << endl;
+       
+       
+    }
 }
 
 void DoEnterMatchResult (void){
@@ -197,7 +207,7 @@ void DoDeductPoints (void){
             if(league[i].GetPoints() >= points)
                 league[i].DeductPoints(points);
             else
-                cout << "Error: Leagues total points exceeded, no change made.";
+                cout << "Error: Leagues total points exceeded, no change made." << endl;
         }
             
 }
