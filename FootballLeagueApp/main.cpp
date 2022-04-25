@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <iomanip>
 #include "CFootballTeam.hpp"
 
 //  Menu Prototypes
@@ -173,7 +174,11 @@ void DoDisplayLeague(void) {
    
     cout << "DoDisplayLeague should display the league table" << endl;
     // Added table headers as requested in project spec
-    cout << "|\tName\t\tGames Played\tGoals For\tGoals Against\tPoints\t|" << endl;
+    cout << "|" << left << setw(10) << "Name" << "\t|\t"
+                << left << setw(7) << "Played" << "\t|\t"
+                << left << setw(7) << "For" << "\t|\t"
+                << left << setw(7) << "Against" << "\t|\t"
+                << left << setw(7) << "Points" << "\t|" << endl;
     for (int i = 0; i < LEAGUE_SIZE; i++) {
 //        Formatting output as table
 //        cout << "Name: " << league[i].GetName() << endl;
@@ -181,11 +186,11 @@ void DoDisplayLeague(void) {
 //        cout << "goals for: " << league[i].GetGoalsFor() << endl;
 //        cout << "goals Against: " << league[i].GetGoalsAgainst() << endl;
 //        cout << "points: " << league[i].GetPoints() << endl;
-        cout << "|\t" << league[i].GetName() << "\t|\t";
-        cout << league[i].GetGamesPlayed() << "\t|\t";
-        cout << league[i].GetGoalsFor() << "\t|\t";
-        cout << league[i].GetGoalsAgainst() << "\t|\t";
-        cout << league[i].GetPoints() << "\t|" << endl;
+        cout << "|" << setw(10) << league[i].GetName() << "\t|\t";
+        cout << right << setw(7) << league[i].GetGamesPlayed() << "\t|\t";
+        cout << setw(7) << league[i].GetGoalsFor() << "\t|\t";
+        cout << setw(7) << league[i].GetGoalsAgainst() << "\t|\t";
+        cout << setw(7) << league[i].GetPoints() << "\t|" << endl;
        
     }
     
@@ -260,25 +265,30 @@ void DoRemoveTeamFromList(void){
     int position = -1, mod = 0;
     cout << "Please enter the team name you wish to delete." << endl;
     cin >> name;
+    // Loop through the league to locate position of the team in the array
     for (int i = 0; i < LEAGUE_SIZE; i++)
     {
         if (name == league[i].GetName()){
             position = i;
         }
     }
+    // Create a new array to temporarily hold the elements while we resize, this isn't the most efficent solution but it works.
     CFootballTeam* newLeague = new CFootballTeam[LEAGUE_SIZE-1];
+    // Output to user if team not found in collection
     if (position == -1)
         cout << "Team wasn't found in the league\n";
     else
+        // loop through the arrat
         for(int i = 0; i < LEAGUE_SIZE; i++)
-            if(position != i){
-                newLeague[i-mod] = league[i];
-            }
-            else
+            // if the position matches i we don't want to swap anything but we need to account for this by increasing a mod variable
+            if(position == i)
                 mod++;
-    league = newLeague;
-    LEAGUE_SIZE--;
-    delete [] newLeague;
+            // else (all elements except the one to be removed) we add the element to temp array i-mod insures we account for the element we passed over.
+            else
+                newLeague[i-mod] = league[i];
+    league = newLeague;// set our original league variable equal to the temp array we created
+    LEAGUE_SIZE--;// Update LEAGUE_SIZE
+    delete [] newLeague;// Delete temp array from the heap in memory
     cout << endl;
 }
 
