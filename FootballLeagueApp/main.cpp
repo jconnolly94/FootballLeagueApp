@@ -256,30 +256,30 @@ void DoRelegationZone (void){
 
 void DoRemoveTeamFromList(void){
     cout << "Allows the user to remove a team from the existing list of teams." << endl;
-        string name, kNum;
-        bool foundInList;
-        int found = 0;
-        cout << "Please enter the team name you wish to delete." << endl;
-        cin >> name;
-        for (int i = 0; i < LEAGUE_SIZE; i++)
-        {
-            foundInList = teamExistsInLeague(name);
-            if (foundInList)
-            {
-            //delete team
-           
-                for (int j = i; j < (LEAGUE_SIZE - 1); j++)
-                {
-                    LEAGUE_SIZE.erase(LEAGUE_SIZE.begin() + j);
-                    found++;
-                }
-            }
+    string name, kNum;
+    int position = -1, mod = 0;
+    cout << "Please enter the team name you wish to delete." << endl;
+    cin >> name;
+    for (int i = 0; i < LEAGUE_SIZE; i++)
+    {
+        if (name == league[i].GetName()){
+            position = i;
         }
-        if (found == 0)
-            cout << "\team wasnt't found in the Array!";
-        else
-            cout << "\team Deleted Successfully!";
-        cout << endl;
+    }
+    CFootballTeam* newLeague = new CFootballTeam[LEAGUE_SIZE-1];
+    if (position == -1)
+        cout << "Team wasn't found in the league\n";
+    else
+        for(int i = 0; i < LEAGUE_SIZE; i++)
+            if(position != i){
+                newLeague[i-mod] = league[i];
+            }
+            else
+                mod++;
+    league = newLeague;
+    LEAGUE_SIZE--;
+    delete [] newLeague;
+    cout << endl;
 }
 
 bool teamExistsInLeague(string name){
