@@ -270,9 +270,9 @@ void DoBestDefence (void){
 }
 
 void DoRelegationZone(void) {
-    for (int i = LEAGUE_SIZE; i >= LEAGUE_SIZE - 2; i--) {
-        cout << league[i - 1].GetName() << ", " << league[i - 1].GetPoints() << "\n";
-    }
+    cout << "The following teams fall in the relegation zone:\n";
+    for(int i = LEAGUE_SIZE; i > LEAGUE_SIZE-3; i--)
+        cout << league[i].GetName() << "\t" << league[i].GetPoints() << endl;
 }
 
 void DoRemoveTeamFromList(void){
