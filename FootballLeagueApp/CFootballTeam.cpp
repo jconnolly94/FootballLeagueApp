@@ -76,12 +76,15 @@ void CFootballTeam::Display(void){
 
 //  Update points based on goals for/against.
 void CFootballTeam::UpdateOnResult(int goalsFor, int goalsAgainst){
+    m_GoalsFor += goalsFor;
+    m_GoalsAgainst += goalsAgainst;
+    m_GamesPlayed++;
     if(goalsFor > goalsAgainst)
         m_Points += 3;
     if(goalsFor == goalsAgainst)
         m_Points += 1;
 }
-
+ 
 
 //  Deduct a given number of points, error checking to be handled in main class
 void CFootballTeam::DeductPoints(int num){

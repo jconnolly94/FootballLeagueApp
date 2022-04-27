@@ -25,6 +25,7 @@ void DoRemoveTeamFromList(void);
 
 // Support Function Prototpes
 bool teamExistsInLeague(string);
+void sortLeague();
 
 
 //global variable to track league size
@@ -186,7 +187,7 @@ void DoDisplayLeague(void) {
 //        cout << "goals for: " << league[i].GetGoalsFor() << endl;
 //        cout << "goals Against: " << league[i].GetGoalsAgainst() << endl;
 //        cout << "points: " << league[i].GetPoints() << endl;
-        cout << "|" << setw(10) << league[i].GetName() << "\t|\t";
+        cout << "|" << left << setw(10) << league[i].GetName() << "\t|\t";
         cout << right << setw(7) << league[i].GetGamesPlayed() << "\t|\t";
         cout << setw(7) << league[i].GetGoalsFor() << "\t|\t";
         cout << setw(7) << league[i].GetGoalsAgainst() << "\t|\t";
@@ -196,9 +197,23 @@ void DoDisplayLeague(void) {
     
 }
 
-void DoEnterMatchResult (void){
-    cout << "DoEnterMatchResult should allow the user to enter a match result in the form:\t hometeam homescore awayteam awayscore." << endl;
+void DoEnterMatchResult(void){
+    string hometeam, awayteam;
+    int homescore, awayscore;
+
+    cout << "Enter match result in the form 'hometeam homescore awayteam awayscore': ";
+    cin >> hometeam >> homescore >> awayteam >> awayscore;
+
+    for (int i = 0; i < LEAGUE_SIZE; i++){
+        if (league[i].HasName(hometeam)) {
+            league[i].UpdateOnResult(homescore, awayscore);
+        }
     
+        else if (league[i].HasName(awayteam)) {
+            league[i].UpdateOnResult(awayscore, homescore);
+        }
+    }
+    sortLeague();
 }
 
 void DoDeductPoints (void){
@@ -254,14 +269,15 @@ void DoBestDefence (void){
     }
 }
 
-void DoRelegationZone (void){
-    cout << "This should display the names and points of the last three teams in the league." << endl;
-    
+void DoRelegationZone(void) {
+    for (int i = LEAGUE_SIZE; i >= LEAGUE_SIZE - 2; i--) {
+        cout << league[i - 1].GetName() << ", " << league[i - 1].GetPoints() << "\n";
+    }
 }
 
 void DoRemoveTeamFromList(void){
     cout << "Allows the user to remove a team from the existing list of teams." << endl;
-    string name, kNum;
+    string name;
     int position = -1, mod = 0;
     cout << "Please enter the team name you wish to delete." << endl;
     cin >> name;
@@ -278,7 +294,7 @@ void DoRemoveTeamFromList(void){
     if (position == -1)
         cout << "Team wasn't found in the league\n";
     else
-        // loop through the arrat
+        // loop through the array
         for(int i = 0; i < LEAGUE_SIZE; i++)
             // if the position matches i we don't want to swap anything but we need to account for this by increasing a mod variable
             if(position == i)
@@ -299,3 +315,10 @@ bool teamExistsInLeague(string name){
     return false;
 }
 
+void sortLeague(){
+    for(int i = 0; i < LEAGUE_SIZE; i++){
+        for(int j = 0; j < LEAGUE_SIZE - i - 1; j++)
+            if(league[j].GetPoints() < league[j+1].GetPoints())
+                swap(league[j], league[j+1]);
+    }
+}
